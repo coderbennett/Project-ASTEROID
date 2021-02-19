@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class AsteroidController : MonoBehaviour {
 
+	public GameObject asteroid;
 	public GameObject destroyAnimation;
 	private bool isOver = false;
 	public Animator animator;
 	private Vector3 mousePosition;
-	public float moveSpeed = 0.1f;
+	public float moveSpeed = 6f;
+	public bool orbitting = false;
+	public GameObject earth;
+	public GameObject moon;
+	private Transform parent;
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -17,6 +22,18 @@ public class AsteroidController : MonoBehaviour {
 			SpawnDestroyAnimation(transform.position);
 			Destroy(gameObject);
         }
+
+		if (collision.tag == "Gravity" && collision.name == "Earth Gravitational Pull")
+        {
+			orbitting = true;
+			parent = earth.transform;
+		}
+
+		if (collision.tag == "Gravity" && collision.name == "Moon Gravitational Pull")
+		{
+			orbitting = true;
+			parent = moon.transform;
+		}
 	}
 
 	public void SpawnDestroyAnimation(Vector3 position)
@@ -54,7 +71,17 @@ public class AsteroidController : MonoBehaviour {
 			mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 			transform.position = Vector2.Lerp(transform.position, mousePosition, moveSpeed);
 		}
+
+		if (orbitting == true)
+        {
+			GravitationalPull(parent);
+        }
 	}
+
+	public void GravitationalPull(Transform newParent)
+    {
+		asteroid.transform.SetParent(newParent);
+    }
 
 	// Use this for initialization
 	void Start () {
