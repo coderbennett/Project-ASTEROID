@@ -14,6 +14,7 @@ public class AsteroidController : MonoBehaviour {
 	public GameObject earth;
 	public GameObject moon;
 	private Transform parent;
+	public spawnerScript spawnHub;
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -85,6 +86,5 @@ public class AsteroidController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 }
