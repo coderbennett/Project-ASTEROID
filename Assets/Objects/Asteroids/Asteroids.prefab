@@ -144,11 +144,10 @@ MonoBehaviour:
   destroyAnimation: {fileID: 1338826022731432, guid: 559980d86583c0f4d8e8cab612b9ce73,
     type: 2}
   animator: {fileID: 95920586764584452}
+  rb: {fileID: 50962707705097908}
   moveSpeed: 6
   orbitting: 0
-  earth: {fileID: 0}
-  moon: {fileID: 0}
-  spawnHub: {fileID: 0}
+  homingSpeed: 0.25
 --- !u!114 &114386100021707632
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Gravity
   - Earth
+  - Spawn Hub
+  - Moon
   layers:
   - Default
   - TransparentFX
