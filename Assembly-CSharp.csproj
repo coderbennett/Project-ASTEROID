@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\destroyScript.cs" />
      <Compile Include="Assets\Scripts\healthBarScript.cs" />
      <Compile Include="Assets\Scripts\orbiterScript.cs" />
+     <Compile Include="Assets\Scripts\scoreScript.cs" />
      <Compile Include="Assets\Scripts\spawnerScript.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/Program Files/Unity Projects/Project ASTEROID/Project-ASTEROID/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

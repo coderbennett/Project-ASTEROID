@@ -19,7 +19,9 @@ public class AsteroidController : MonoBehaviour {
 	private GameObject spawnHub;
 	private spawnerScript spawnHubScript;
 
-	
+	private int asteroidScore;
+	private bool scoreNow = true;
+	private GameObject scoreBoard;
 
 	public float homingSpeed = 0.5f;
 
@@ -89,6 +91,12 @@ public class AsteroidController : MonoBehaviour {
 
 	void Update()
 	{
+		if (scoreNow)
+		{
+			Invoke("myScore", 10f);
+			scoreNow = false;
+		}
+
 		if (orbitting)
 		{
 			GravitationalPull(parent);
@@ -121,6 +129,9 @@ public class AsteroidController : MonoBehaviour {
 		transform.position = Vector3.MoveTowards(transform.position, earth.transform.position, homingSpeed);
 		if (Input.GetMouseButtonDown(0) && isOver)
 		{
+			scoreBoard = GameObject.FindWithTag("Score Board");
+			scoreScript scoreboard = (scoreScript)scoreBoard.GetComponent(typeof(scoreScript));
+			scoreboard.increaseScore(asteroidScore);
 			SpawnDestroyAnimation(transform.position);
 			spawnerScript.totalAsteroids--;
 			Destroy(gameObject);
@@ -152,5 +163,11 @@ public class AsteroidController : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 		earth = GameObject.FindWithTag("Earth");
+	}
+
+	void myScore()
+	{
+		asteroidScore += 1;
+		scoreNow = true;
 	}
 }
