@@ -8,6 +8,9 @@ TagManager:
   - Earth
   - Spawn Hub
   - Moon
+  - Health Bar
+  - Health Symbol
+  - Asteroid
   layers:
   - Default
   - TransparentFX

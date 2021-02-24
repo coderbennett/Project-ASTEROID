@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\Scripts\destroyScript.cs" />
+     <Compile Include="Assets\Scripts\healthBarScript.cs" />
      <Compile Include="Assets\Scripts\orbiterScript.cs" />
      <Compile Include="Assets\Scripts\spawnerScript.cs" />
  <Reference Include="UnityEditor.StandardEvents">

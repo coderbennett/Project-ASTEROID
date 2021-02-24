@@ -19,21 +19,45 @@ public class AsteroidController : MonoBehaviour {
 	private GameObject spawnHub;
 	private spawnerScript spawnHubScript;
 
+	
+
 	public float homingSpeed = 0.5f;
 
 	private GameObject earth;
+	private GameObject healthbar;
+	private GameObject healthsymbol;
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.tag == "Earth")
 		{
+			healthbar = GameObject.FindWithTag("Health Bar");
+			healthsymbol = GameObject.FindWithTag("Health Symbol");
 			SpawnDestroyAnimation(transform.position);
+			healthBarScript healthBar = (healthBarScript)healthbar.GetComponent(typeof(healthBarScript));
+			healthBar.healthDamaged();
+			healthBarScript healthSymbol = (healthBarScript)healthsymbol.GetComponent(typeof(healthBarScript));
+			healthSymbol.healthDamaged();
 			spawnerScript.totalAsteroids--;
 			Destroy(gameObject);
 		}
 
 		if (collision.tag == "MainCamera")
 		{
+			spawnerScript.totalAsteroids--;
+			Destroy(gameObject);
+		}
+
+		if (collision.tag == "Asteroid")
+		{
+			SpawnDestroyAnimation(transform.position);
+			spawnerScript.totalAsteroids--;
+			Destroy(gameObject);
+		}
+
+		if (collision.tag == "Moon")
+		{
+			SpawnDestroyAnimation(transform.position);
 			spawnerScript.totalAsteroids--;
 			Destroy(gameObject);
 		}
