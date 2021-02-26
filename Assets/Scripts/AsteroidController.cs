@@ -22,6 +22,7 @@ public class AsteroidController : MonoBehaviour {
 	private int asteroidScore;
 	private bool scoreNow = true;
 	private GameObject scoreBoard;
+	private Color asteroidColor;
 
 	public float homingSpeed = 0.5f;
 
@@ -93,12 +94,17 @@ public class AsteroidController : MonoBehaviour {
 	{
 		if (scoreNow)
 		{
+			if(orbitting)
+            {
+			Invoke("myScore", 10f);
+			}
 			Invoke("myScore", 10f);
 			scoreNow = false;
 		}
 
 		if (orbitting)
 		{
+			
 			GravitationalPull(parent);
 			distancefromParent = Vector3.Distance(parent.position, transform.position);
 			if (distancefromParent < 0 && distancefromParent < (gDistance * -1))
@@ -129,8 +135,10 @@ public class AsteroidController : MonoBehaviour {
 		transform.position = Vector3.MoveTowards(transform.position, earth.transform.position, homingSpeed);
 		if (Input.GetMouseButtonDown(0) && isOver)
 		{
+			asteroidColor = new Color(0.75f, 0.75f, 0.75f);
 			scoreBoard = GameObject.FindWithTag("Score Board");
 			scoreScript scoreboard = (scoreScript)scoreBoard.GetComponent(typeof(scoreScript));
+			floatingTextController.CreateFloatingText(asteroidScore.ToString(), transform, asteroidColor);
 			scoreboard.increaseScore(asteroidScore);
 			SpawnDestroyAnimation(transform.position);
 			spawnerScript.totalAsteroids--;
@@ -157,6 +165,7 @@ public class AsteroidController : MonoBehaviour {
 	public void SetHoming()
 	{
 		homingSpeed = 5f;
+		asteroidScore += 10;
 	}
 
 	// Use this for initialization
