@@ -1300,9 +1300,10 @@ GameObject:
   - component: {fileID: 119634728}
   - component: {fileID: 119634730}
   - component: {fileID: 119634729}
+  - component: {fileID: 119634731}
   m_Layer: 0
   m_Name: Mars
-  m_TagString: Untagged
+  m_TagString: Moon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1378,6 +1379,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &119634731
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 119634727}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.02247863, y: -0.18693869}
+  serializedVersion: 2
+  m_Radius: 5.0398307
 --- !u!1 &124764124
 GameObject:
   m_ObjectHideFlags: 0
@@ -10338,9 +10354,10 @@ GameObject:
   - component: {fileID: 861321848}
   - component: {fileID: 861321849}
   - component: {fileID: 861321850}
+  - component: {fileID: 861321851}
   m_Layer: 0
   m_Name: Venus
-  m_TagString: Untagged
+  m_TagString: Moon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10416,6 +10433,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 25
+--- !u!58 &861321851
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 861321847}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.008409076, y: -0.13187881}
+  serializedVersion: 2
+  m_Radius: 5.0435038
 --- !u!1 &871040689
 GameObject:
   m_ObjectHideFlags: 0

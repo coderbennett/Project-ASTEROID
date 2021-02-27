@@ -11,7 +11,7 @@ public class AsteroidController : MonoBehaviour {
 	public Animator animator;
 	public Rigidbody2D rb;
 	private Vector3 mousePosition;
-	public float moveSpeed = 6f;
+	public float moveSpeed = 20f;
 	public bool orbitting = false;
 
 	private Transform parent;
