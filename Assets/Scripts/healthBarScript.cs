@@ -12,19 +12,20 @@ public class healthBarScript : MonoBehaviour {
 
 	private bool scoreNow = true;
 	private GameObject scoreBoard;
-	private Color healthColor;
+	private string healthColor;
 
 	private Vector3 location;
 
 	// Use this for initialization
 	void Start () {
 		earth = GameObject.Find("Earth");
+		scoreBoard = GameObject.FindWithTag("Score Board");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		animator.SetInteger("health", health);
-		if (scoreNow)
+		if (scoreNow && gameObject.name == "Health")
 		{
 			scoreNow = false;
 			Invoke("healthScore", 10f);
@@ -33,19 +34,19 @@ public class healthBarScript : MonoBehaviour {
 		if (health > 7)
         {
 			//light green color
-			healthColor = new Color(0.49f, 0.99f, 0f);
+			healthColor = "green";
         } else if (health < 8 && health > 5)
         {
 			//gold yellow
-			healthColor = new Color(1.0f, 0.84f, 0f);
+			healthColor = "yellow";
 		} else if (health < 6 && health > 1)
         {
 			//orange
-			healthColor = new Color(1.0f, 0.55f, 0f);
+			healthColor = "orange";
         } else if (health == 1)
         {
 			//tomato red
-			healthColor = new Color(1.0f, 0.27f, 0f);
+			healthColor = "red";
 		}
 	}
 
@@ -56,10 +57,9 @@ public class healthBarScript : MonoBehaviour {
 
 	void healthScore()
 	{
-		scoreBoard = GameObject.FindWithTag("Score Board");
 		scoreScript scoreboard = (scoreScript)scoreBoard.GetComponent(typeof(scoreScript));
-		floatingTextController.CreateFloatingText((health*2).ToString(), earth.transform, healthColor);
-		scoreboard.increaseScore(health);
+		floatingTextController.CreateFloatingText("+" + (health*3).ToString(), earth.transform, false, healthColor);
+		scoreboard.increaseScore((health*3));
 		scoreNow = true;
 	}
 }

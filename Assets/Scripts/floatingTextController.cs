@@ -12,13 +12,13 @@ public class floatingTextController : MonoBehaviour {
         popupText = Resources.Load<floatingTextScript>("Prefabs/PopupTextParent");
     }
 
-    public static void CreateFloatingText(string text, Transform location, Color color)
+    public static void CreateFloatingText(string text, Transform location, bool miningIncrease, string color)
     {
         Initialize();
         floatingTextScript instance = Instantiate(popupText);
+        instance.SetText(text, miningIncrease, color);
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
         instance.transform.SetParent(canvas.transform, false);
         instance.transform.position = screenPosition;
-        instance.SetText(text, color);
     }
 }

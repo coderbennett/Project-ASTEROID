@@ -6,6 +6,7 @@ public class AsteroidController : MonoBehaviour {
 
 	public GameObject asteroid;
 	public GameObject destroyAnimation;
+	public GameObject markAnimation;
 	private bool isOver = false;
 	public Animator animator;
 	public Rigidbody2D rb;
@@ -20,9 +21,11 @@ public class AsteroidController : MonoBehaviour {
 	private spawnerScript spawnHubScript;
 
 	private int asteroidScore;
+	private int asteroidMiningRate = 4;
+	private int asteroidScoreMax = 400;
+	private int asteroidLevel = 0;
 	private bool scoreNow = true;
 	private GameObject scoreBoard;
-	private Color asteroidColor;
 
 	public float homingSpeed = 0.5f;
 
@@ -30,7 +33,13 @@ public class AsteroidController : MonoBehaviour {
 	private GameObject healthbar;
 	private GameObject healthsymbol;
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	public SpriteRenderer sprite;
+	private string color = "gray";
+	private int luck;
+
+	private bool isMarked = false;
+
+		private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.tag == "Earth")
 		{
@@ -90,16 +99,22 @@ public class AsteroidController : MonoBehaviour {
 		Instantiate(destroyAnimation, position, Quaternion.identity);
 	}
 
+	public void SpawnMarkedAnimation(Vector3 position)
+	{
+		GameObject mark = Instantiate(markAnimation, position, Quaternion.identity);
+		mark.transform.SetParent(transform);
+	}
+
 	void Update()
 	{
-		if (scoreNow)
+		if (scoreNow && orbitting)
 		{
-			if(orbitting)
-            {
-			Invoke("myScore", 10f);
-			}
-			Invoke("myScore", 10f);
+			floatingTextController.CreateFloatingText("+" + asteroidMiningRate.ToString(), transform, false, color);
+			scoreScript scoreboard = (scoreScript)scoreBoard.GetComponent(typeof(scoreScript));
+			scoreboard.increaseScore(asteroidMiningRate);
+			asteroidScore += asteroidMiningRate;
 			scoreNow = false;
+			Invoke("WaitTime", 6f);
 		}
 
 		if (orbitting)
@@ -117,6 +132,70 @@ public class AsteroidController : MonoBehaviour {
 			}
 		}
 		animator.SetBool("isOver", isOver);
+
+		if (asteroidScore > 50 && asteroidLevel == 0)
+        {
+			asteroidMiningRate += 2;
+			asteroidLevel = 1;
+			floatingTextController.CreateFloatingText("mining rate increased", transform, true, color);
+		}
+
+		if (asteroidScore > 100 && asteroidLevel == 1)
+		{
+			asteroidMiningRate += 2;
+			asteroidLevel = 2;
+			floatingTextController.CreateFloatingText("mining rate increased", transform, true, color);
+		}
+
+		if (asteroidScore > 150 && asteroidLevel == 2)
+		{
+			asteroidMiningRate += 2;
+			asteroidLevel = 3;
+			floatingTextController.CreateFloatingText("mining rate increased", transform, true, color);
+		}
+
+		if (asteroidScore > 200 && asteroidLevel == 3)
+		{
+			asteroidMiningRate += 2;
+			asteroidLevel = 4;
+			floatingTextController.CreateFloatingText("mining rate increased", transform, true, color);
+		}
+
+		if (asteroidScore > 250 && asteroidLevel == 4)
+		{
+			asteroidMiningRate += 2;
+			asteroidLevel = 5;
+			floatingTextController.CreateFloatingText("mining rate increased", transform, true, color);
+		}
+
+		if (asteroidScore > 300 && asteroidLevel == 5)
+		{
+			asteroidMiningRate += 2;
+			asteroidLevel = 6;
+			floatingTextController.CreateFloatingText("mining rate increased", transform, true, color);
+		}
+
+		if (asteroidScore > 350 && asteroidLevel == 6)
+		{
+			asteroidMiningRate += 2;
+			asteroidLevel = 7;
+			floatingTextController.CreateFloatingText("mining rate increased", transform, true, color);
+		}
+
+		if (asteroidScore > 375 && asteroidLevel == 7)
+		{
+			asteroidMiningRate += 2;
+			asteroidLevel = 8;
+			floatingTextController.CreateFloatingText("mining rate increased", transform, true, color);
+		}
+
+
+		if (asteroidScore == asteroidScoreMax)
+        {
+			SpawnDestroyAnimation(transform.position);
+			spawnerScript.totalAsteroids--;
+			Destroy(gameObject);
+		}
 	}
 
 	//this will track the mouse movement (if it is over the asteroid or not)
@@ -133,16 +212,11 @@ public class AsteroidController : MonoBehaviour {
 	private void FixedUpdate()
 	{
 		transform.position = Vector3.MoveTowards(transform.position, earth.transform.position, homingSpeed);
-		if (Input.GetMouseButtonDown(0) && isOver)
+		if (Input.GetMouseButtonDown(0) && isOver && !isMarked)
 		{
-			asteroidColor = new Color(0.75f, 0.75f, 0.75f);
-			scoreBoard = GameObject.FindWithTag("Score Board");
-			scoreScript scoreboard = (scoreScript)scoreBoard.GetComponent(typeof(scoreScript));
-			floatingTextController.CreateFloatingText(asteroidScore.ToString(), transform, asteroidColor);
-			scoreboard.increaseScore(asteroidScore);
-			SpawnDestroyAnimation(transform.position);
-			spawnerScript.totalAsteroids--;
-			Destroy(gameObject);
+			isMarked = true;
+			SpawnMarkedAnimation(transform.position);
+			Invoke("DestroyTarget", 2f);
 		}
 
 		if (Input.GetMouseButton(1) && isOver)
@@ -164,19 +238,49 @@ public class AsteroidController : MonoBehaviour {
 
 	public void SetHoming()
 	{
-		homingSpeed = 5f;
-		asteroidScore += 10;
+		homingSpeed = 5f + (scoreScript.score *.001f);
 	}
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 		earth = GameObject.FindWithTag("Earth");
+		scoreBoard = GameObject.FindWithTag("Score Board");
+		luck = Random.Range(0, 100);
+		if (luck > 29 && luck < 40)
+        {
+			sprite.color = Color.yellow;
+			color = "yellow";
+			asteroidMiningRate += 4;
+			asteroidScoreMax = 800;
+        } else if (luck > 90 && luck < 93)
+		{
+			sprite.color = Color.magenta;
+			color = "magenta";
+			asteroidMiningRate += 14;
+			asteroidScoreMax = 1600;
+		}
+		else if (luck > 1 && luck< 6)
+		{
+			sprite.color = new Color(0.67f, 0.82f, 0.97f);
+			color = "ice";
+			asteroidMiningRate += 5;
+			asteroidScoreMax = 900;
+		}
 	}
 
-	void myScore()
+	void WaitTime()
 	{
-		asteroidScore += 1;
 		scoreNow = true;
+	}
+
+	void DestroyTarget()
+	{
+		floatingTextController.CreateFloatingText("+6", transform, false, color);
+		scoreScript scoreboard = (scoreScript)scoreBoard.GetComponent(typeof(scoreScript));
+		scoreboard.increaseScore(6);
+		SpawnDestroyAnimation(transform.position);
+		spawnerScript.totalAsteroids--;
+		Destroy(gameObject);
 	}
 }
