@@ -5,6 +5,7 @@ using UnityEngine;
 public class healthBarScript : MonoBehaviour {
 
 	public Animator animator;
+	public AudioSource audio;
 
 	public int health = 9;
 
@@ -20,6 +21,7 @@ public class healthBarScript : MonoBehaviour {
 	void Start () {
 		earth = GameObject.Find("Earth");
 		scoreBoard = GameObject.FindWithTag("Score Board");
+		audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -53,6 +55,10 @@ public class healthBarScript : MonoBehaviour {
 	public void healthDamaged()
     {
 		health--;
+		if (gameObject.name == "Health")
+		{
+			audio.Play();
+		}
 	}
 
 	void healthScore()

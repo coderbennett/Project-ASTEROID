@@ -37,6 +37,9 @@ public class AsteroidController : MonoBehaviour {
 	private string color = "gray";
 	private int luck;
 
+	public AudioSource audio;
+	private bool audioOn = false;
+
 	private bool isMarked = false;
 
 		private void OnTriggerEnter2D(Collider2D collision)
@@ -228,7 +231,18 @@ public class AsteroidController : MonoBehaviour {
 			mousePosition = Input.mousePosition;
 			mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 			transform.position = Vector2.Lerp(transform.position, mousePosition, moveSpeed);
+			if (!audioOn)
+            {
+				audio.Play();
+				audioOn = true;
+			}
 		}
+
+		if (audioOn && !Input.GetMouseButton(1) && !isOver)
+        {
+			audio.Pause();
+			audioOn = false;
+        }
 	}
 
 	public void GravitationalPull(Transform newParent)
@@ -246,6 +260,7 @@ public class AsteroidController : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 		earth = GameObject.FindWithTag("Earth");
 		scoreBoard = GameObject.FindWithTag("Score Board");
+		audio = GetComponent<AudioSource>();
 		luck = Random.Range(0, 100);
 		if (luck > 29 && luck < 40)
         {
