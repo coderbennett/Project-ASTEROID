@@ -13,6 +13,8 @@ TagManager:
   - Asteroid
   - Score Board
   - Canvas
+  - wall
+  - barrier
   layers:
   - Default
   - TransparentFX

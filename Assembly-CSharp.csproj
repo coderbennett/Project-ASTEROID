@@ -58,6 +58,8 @@
      <Compile Include="Assets\Scripts\floatingTextController.cs" />
      <Compile Include="Assets\Scripts\floatingTextScript.cs" />
      <Compile Include="Assets\Scripts\healthBarScript.cs" />
+     <Compile Include="Assets\Scripts\menuAsteroidScript.cs" />
+     <Compile Include="Assets\Scripts\menuSpawnerScript.cs" />
      <Compile Include="Assets\Scripts\orbiterScript.cs" />
      <Compile Include="Assets\Scripts\scoreScript.cs" />
      <Compile Include="Assets\Scripts\spawnerScript.cs" />
