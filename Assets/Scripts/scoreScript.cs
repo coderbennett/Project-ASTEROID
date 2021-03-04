@@ -11,10 +11,12 @@ public class scoreScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		//update the score text according to the score variables
 		scoreString = score.ToString();
 		scoreText.text = scoreString;
 	}
 
+	//use this method to increase the score
 	public void increaseScore(int number)
     {
 		score += number;

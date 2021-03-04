@@ -60,8 +60,9 @@
      <Compile Include="Assets\Scripts\healthBarScript.cs" />
      <Compile Include="Assets\Scripts\mainMenuScript.cs" />
      <Compile Include="Assets\Scripts\menuAsteroidScript.cs" />
-     <Compile Include="Assets\Scripts\menuSpawnerScript.cs" />
      <Compile Include="Assets\Scripts\orbiterScript.cs" />
+     <Compile Include="Assets\Scripts\pauseButtonScript.cs" />
+     <Compile Include="Assets\Scripts\pauseMenuPanelScript.cs" />
      <Compile Include="Assets\Scripts\scoreScript.cs" />
      <Compile Include="Assets\Scripts\spawnerScript.cs" />
  <Reference Include="UnityEditor.StandardEvents">

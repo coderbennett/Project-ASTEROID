@@ -192,6 +192,9 @@ Assets/Scripts/mainMenuScript.cs
 Assets/Scripts/menuAsteroidScript.cs
 Assets/Scripts/menuSpawnerScript.cs
 Assets/Scripts/orbiterScript.cs
+Assets/Scripts/pauseButtonScript.cs
+Assets/Scripts/pauseGameScript.cs
+Assets/Scripts/pauseMenuPanelScript.cs
 Assets/Scripts/scoreScript.cs
 Assets/Scripts/spawnerScript.cs
 -lib:"D:\Program Files\Editor\Data\MonoBleedingEdge\lib\mono\unity"

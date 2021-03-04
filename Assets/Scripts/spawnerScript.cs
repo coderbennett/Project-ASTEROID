@@ -33,28 +33,27 @@ public class spawnerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-		if (totalAsteroids < maxAsteroids)
+		//set which spawn point will spawn a slow and less deadly asteroid
+		spawner = Random.Range(1, 5);
+		if (spawner == 1)
 		{
-			spawner = Random.Range(1, 5);
-			if (spawner == 1)
-			{
-				point = point1;
-			}
-			else if (spawner == 2)
-			{
-				point = point2;
-			}
-			else if (spawner == 3)
-			{
-				point = point3;
-			}
-			else
-			{
-				point = point4;
-			}
-			Invoke("SpawnAsteroid", spawnTime);
+			point = point1;
 		}
+		else if (spawner == 2)
+		{
+			point = point2;
+		}
+		else if (spawner == 3)
+		{
+			point = point3;
+		}
+		else
+		{
+			point = point4;
+		}
+		Invoke("SpawnAsteroid", spawnTime);
 
+		//set which homing spawn point will spawn a faster and more deadly asteroid
 		spawnerHoming = Random.Range(5, 10);
 		if (spawnerHoming == 5)
 		{
@@ -82,10 +81,13 @@ public class spawnerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//set the asteroid count to the total number of asteroids on the map
 		asteroidCount = totalAsteroids;
 
+		//if it is time to spawn an asteroid and we haven't exceeded the maximum allowed asteroids on the map, then proceed
 		if (spawn == true && (totalAsteroids < maxAsteroids))
 		{
+			//set which spawner we're going to be using
 			spawner = Random.Range(1, 5);
 			if (spawner == 1)
 			{
@@ -104,12 +106,15 @@ public class spawnerScript : MonoBehaviour {
 				point = point4;
 			}
 			Invoke("SpawnAsteroid", spawnTime);
+			//increase the counter for the total number of asteroids we have
 			totalAsteroids++;
+			//set the spawner false since we just invoked the method (which the method itself will restart this process)
 			spawn = false;
 		}
 
 		if (spawnHoming == true)
 		{
+			//set which of the homing spawners we will be using
 			spawnerHoming = Random.Range(5, 10);
 			if (spawnerHoming == 5)
 			{
@@ -132,22 +137,32 @@ public class spawnerScript : MonoBehaviour {
 				pointHoming = point9;
 			}
 			Invoke("SpawnHomingAsteroid", spawnTime);
+			//increase the counter for the total number of asteroids we have
 			totalAsteroids++;
+			//set the spawner false since we just invoked the method (which the method itself will restart this process)
 			spawnHoming = false;
 		}
 	}
 
+	//this method will spawn an asteroid if the game is not paused
 	void SpawnAsteroid()
 	{
-		Instantiate(asteroid, point.transform.position, Quaternion.identity);
+		if (!healthBarScript.paused)
+		{
+			Instantiate(asteroid, point.transform.position, Quaternion.identity);
+		}
 		spawn = true;
 	}
 
+	//this method will spawn an asteroid if the game is not paused
 	void SpawnHomingAsteroid()
 	{
-		homingAsteroid = Instantiate(asteroid, pointHoming.transform.position, Quaternion.identity);
-		AsteroidController asteroidController = (AsteroidController)homingAsteroid.GetComponent(typeof(AsteroidController));
-		asteroidController.SetHoming();
+		if (!healthBarScript.paused)
+		{
+			homingAsteroid = Instantiate(asteroid, pointHoming.transform.position, Quaternion.identity);
+			AsteroidController asteroidController = (AsteroidController)homingAsteroid.GetComponent(typeof(AsteroidController));
+			asteroidController.SetHoming();
+		}
 		spawnHoming = true;
 	}
 }

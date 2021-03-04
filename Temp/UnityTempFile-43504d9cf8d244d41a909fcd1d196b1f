@@ -183,15 +183,17 @@
 -define:ENABLE_UNITY_COLLECTIONS_CHECKS
 -define:ENABLE_BURST_AOT
 -define:UNITY_TEAM_LICENSE
-Assets/mainMenuScript.cs
 Assets/Scripts/AsteroidController.cs
 Assets/Scripts/destroyScript.cs
 Assets/Scripts/floatingTextController.cs
 Assets/Scripts/floatingTextScript.cs
 Assets/Scripts/healthBarScript.cs
+Assets/Scripts/mainMenuScript.cs
 Assets/Scripts/menuAsteroidScript.cs
 Assets/Scripts/menuSpawnerScript.cs
 Assets/Scripts/orbiterScript.cs
+Assets/Scripts/pauseGameScript.cs
+Assets/Scripts/pauseMenuPanelScript.cs
 Assets/Scripts/scoreScript.cs
 Assets/Scripts/spawnerScript.cs
 -lib:"D:\Program Files\Editor\Data\MonoBleedingEdge\lib\mono\unity"
