@@ -10,14 +10,28 @@ public class pauseButtonScript : MonoBehaviour {
 	public Text text2;
 	public string color;
 	private bool isOver = false;
+	private Collider2D boxCollider;
+	private bool isActivated = true;
 
 	// Use this for initialization
 	void Start ()
 	{
+		boxCollider = GetComponent<Collider2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (!healthBarScript.paused && !healthBarScript.gameover && isActivated)
+        {
+			DeactivateCollider();
+		}
+
+		if ((healthBarScript.paused || healthBarScript.gameover) && !isActivated)
+        {
+			ActivateCollider();
+        }
+
 		//if the mouse is over this button and the game is paused, light it up
 		if (isOver && healthBarScript.paused)
 		{
@@ -109,13 +123,15 @@ public class pauseButtonScript : MonoBehaviour {
 		isOver = false;
 	}
 
-	public void ActivateButton()
+	public void ActivateCollider()
 	{
-		gameObject.SetActive(true);
+		boxCollider.enabled = true;
+		isActivated = true;
 	}
 
-	public void DeactivateButton()
+	public void DeactivateCollider()
 	{
-		gameObject.SetActive(false);
+		boxCollider.enabled = false;
+		isActivated = false;
 	}
 }

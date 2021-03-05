@@ -71,31 +71,15 @@ public class healthBarScript : MonoBehaviour {
 		if (health == 0 && !gameover && gameObject.name == "Health")
         {
 			gameover = true;
-			pauseButtonScript buttonOne = (pauseButtonScript)button1.GetComponent(typeof(pauseButtonScript));
-			buttonOne.ActivateButton();
-			pauseButtonScript buttonTwo = (pauseButtonScript)button2.GetComponent(typeof(pauseButtonScript));
-			buttonTwo.ActivateButton();
-			pauseButtonScript buttonThree = (pauseButtonScript)button3.GetComponent(typeof(pauseButtonScript));
-			buttonThree.ActivateButton();
-			pauseMenuPanelScript gameoverMenu = (pauseMenuPanelScript)gameoverPanel.GetComponent(typeof(pauseMenuPanelScript));
-			gameoverMenu.ActivatePanel();
 		}
 	}
 
 	private void FixedUpdate()
 	{
 		//if you press the escape key, the game is paused and the object with this script is named health, pause the game
-		if (Input.GetKey(KeyCode.Escape) && !paused && gameObject.name == "Health")
+		if (Input.GetKey(KeyCode.Escape) && !paused && gameObject.name == "Health" && !gameover)
 		{
 			paused = true;
-			pauseButtonScript buttonOne = (pauseButtonScript)button1.GetComponent(typeof(pauseButtonScript));
-			buttonOne.ActivateButton();
-			pauseButtonScript buttonTwo = (pauseButtonScript)button2.GetComponent(typeof(pauseButtonScript));
-			buttonTwo.ActivateButton();
-			pauseButtonScript buttonThree = (pauseButtonScript)button3.GetComponent(typeof(pauseButtonScript));
-			buttonThree.ActivateButton();
-			pauseMenuPanelScript pauseMenu = (pauseMenuPanelScript)pausePanel.GetComponent(typeof(pauseMenuPanelScript));
-			pauseMenu.ActivatePanel();
 		}
 	}
 

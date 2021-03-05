@@ -19,7 +19,8 @@ public class pauseMenuPanelScript : MonoBehaviour {
 		//if the game is not paused, make these objects invisible
 		if (!healthBarScript.paused && isPause)
 		{
-			DeactivatePanel();
+			panel.color = new Color(0.75f, 0.75f, 0.75f, 0f);
+			text.color = new Color(0.75f, 0.75f, 0.75f, 0f);
 		}
 		//if the game is paused, make these objects visible
 		if (healthBarScript.paused && isPause)
@@ -30,7 +31,8 @@ public class pauseMenuPanelScript : MonoBehaviour {
 		//if the game is not paused, make these objects invisible
 		if (!healthBarScript.gameover && !isPause)
 		{
-			DeactivatePanel();
+			panel.color = new Color(1f, 0f, 0f, 0f);
+			text.color = new Color(0.71f, 0f, 0f, 0f);
 		}
 		//if the game is paused, make these objects visible
 		if (healthBarScript.gameover && !isPause)
@@ -38,16 +40,5 @@ public class pauseMenuPanelScript : MonoBehaviour {
 			panel.color = new Color(1f, 0f, 0f, 1f);
 			text.color = new Color(0.71f, 0f, 0f, 1f);
 		}
-	}
-
-	public void ActivatePanel()
-	{
-		gameObject.SetActive(true);
-	}
-
-	public void DeactivatePanel()
-	{
-		gameObject.SetActive(false);
-		text.color = new Color(0.71f, 0f, 0f, 0f);
 	}
 }
