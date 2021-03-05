@@ -7,11 +7,13 @@ using UnityEngine.SceneManagement;
 public class pauseButtonScript : MonoBehaviour {
 
 	public Text text;
+	public Text text2;
+	public string color;
 	private bool isOver = false;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+	{
 	}
 	
 	// Update is called once per frame
@@ -29,6 +31,48 @@ public class pauseButtonScript : MonoBehaviour {
         {
 			text.color = new Color(0.75f, 0.75f, 0.75f, 0f);
 		}
+
+		//if the mouse is over this button and the game is paused, light it up
+		if (isOver && healthBarScript.gameover)
+		{
+			if (color == "red")
+            {
+				text2.color = new Color(1f, 0f, 0f, 1f);
+			}
+
+			if (color == "green")
+            {
+				text2.color = new Color(0f, 1f, 0f, 1f);
+			}
+
+		    if (color == "white")
+            {
+				text.color = new Color(1f, 1f, 1f, 1f);
+			}
+			//if the mouse is not over the button but the game is paused, make the text gray
+		}
+		else if (!isOver && healthBarScript.gameover)
+		{
+			if (color == "red")
+			{
+				text2.color = new Color(0.69f, 0f, 0f, 1f);
+			}
+
+			if (color == "green")
+			{
+				text2.color = new Color(0f, 0.69f, 0f, 1f);
+			}
+
+			if (color == "white")
+			{
+				text.color = new Color(0.75f, 0.75f, 0.75f, 1f);
+			}
+			//if the game is not paused make this button invisible
+		}
+		else if (!healthBarScript.gameover)
+		{
+			text2.color = new Color(0.75f, 0.75f, 0.75f, 0f);
+		}
 	}
 
 	private void FixedUpdate()
@@ -38,11 +82,20 @@ public class pauseButtonScript : MonoBehaviour {
 		{
 			healthBarScript.paused = false;
 		}
-		//if you click this button while the game is paused and if this button is the quit button, go to the main menu
-		if (Input.GetMouseButtonDown(0) && isOver && healthBarScript.paused && text.name == "quit")
+		//if you click this button while the game is paused (or gameover) and if this button is the quit button, go to the main menu
+		if (Input.GetMouseButtonDown(0) && isOver && (healthBarScript.paused || healthBarScript.gameover) && text.name == "quit")
 		{
 			healthBarScript.paused = false;
+			healthBarScript.gameover = false;
+			scoreScript.score = 0;
 			SceneManager.LoadScene("Menu");
+		}
+
+		if (Input.GetMouseButtonDown(0) && isOver && healthBarScript.gameover && text2.name == "retry")
+		{
+			healthBarScript.gameover = false;
+			scoreScript.score = 0;
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
 	}
 
@@ -54,5 +107,15 @@ public class pauseButtonScript : MonoBehaviour {
 	public void OnMouseExit()
 	{
 		isOver = false;
+	}
+
+	public void ActivateButton()
+	{
+		gameObject.SetActive(true);
+	}
+
+	public void DeactivateButton()
+	{
+		gameObject.SetActive(false);
 	}
 }

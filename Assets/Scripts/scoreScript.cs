@@ -19,6 +19,9 @@ public class scoreScript : MonoBehaviour {
 	//use this method to increase the score
 	public void increaseScore(int number)
     {
-		score += number;
+		if (!healthBarScript.gameover)
+        {
+			score += number;
+		}
     }
 }

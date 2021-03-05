@@ -20,6 +20,12 @@ public class healthBarScript : MonoBehaviour {
 	public static bool paused = false;
 	public static bool gameover = false;
 
+	public GameObject button1;
+	public GameObject button2;
+	public GameObject button3;
+	public GameObject pausePanel;
+	public GameObject gameoverPanel;
+
 	// Use this for initialization
 	void Start () {
 		//find the earth game object within the scene
@@ -62,10 +68,18 @@ public class healthBarScript : MonoBehaviour {
 			healthColor = "red";
 		}
 
-		if (health == 0)
+		if (health == 0 && !gameover && gameObject.name == "Health")
         {
 			gameover = true;
-        }
+			pauseButtonScript buttonOne = (pauseButtonScript)button1.GetComponent(typeof(pauseButtonScript));
+			buttonOne.ActivateButton();
+			pauseButtonScript buttonTwo = (pauseButtonScript)button2.GetComponent(typeof(pauseButtonScript));
+			buttonTwo.ActivateButton();
+			pauseButtonScript buttonThree = (pauseButtonScript)button3.GetComponent(typeof(pauseButtonScript));
+			buttonThree.ActivateButton();
+			pauseMenuPanelScript gameoverMenu = (pauseMenuPanelScript)gameoverPanel.GetComponent(typeof(pauseMenuPanelScript));
+			gameoverMenu.ActivatePanel();
+		}
 	}
 
 	private void FixedUpdate()
@@ -74,6 +88,14 @@ public class healthBarScript : MonoBehaviour {
 		if (Input.GetKey(KeyCode.Escape) && !paused && gameObject.name == "Health")
 		{
 			paused = true;
+			pauseButtonScript buttonOne = (pauseButtonScript)button1.GetComponent(typeof(pauseButtonScript));
+			buttonOne.ActivateButton();
+			pauseButtonScript buttonTwo = (pauseButtonScript)button2.GetComponent(typeof(pauseButtonScript));
+			buttonTwo.ActivateButton();
+			pauseButtonScript buttonThree = (pauseButtonScript)button3.GetComponent(typeof(pauseButtonScript));
+			buttonThree.ActivateButton();
+			pauseMenuPanelScript pauseMenu = (pauseMenuPanelScript)pausePanel.GetComponent(typeof(pauseMenuPanelScript));
+			pauseMenu.ActivatePanel();
 		}
 	}
 
