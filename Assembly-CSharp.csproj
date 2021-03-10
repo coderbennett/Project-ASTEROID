@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\orbiterScript.cs" />
      <Compile Include="Assets\Scripts\pauseButtonScript.cs" />
      <Compile Include="Assets\Scripts\pauseMenuPanelScript.cs" />
+     <Compile Include="Assets\Scripts\quitButtonScoreScript.cs" />
      <Compile Include="Assets\Scripts\scoreScript.cs" />
      <Compile Include="Assets\Scripts\spawnerScript.cs" />
  <Reference Include="UnityEngine">

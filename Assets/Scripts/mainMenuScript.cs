@@ -35,6 +35,11 @@ public class mainMenuScript : MonoBehaviour {
 			SceneManager.LoadScene("Space");
 		}
 
+		if (Input.GetMouseButtonDown(0) && isOver && gameObject.name == "highscoreButton")
+		{
+			SceneManager.LoadScene("Highscores");
+		}
+
 		//if you left click the mouse over this game object and this game object's name is quitButton, then quit the game
 		if (Input.GetMouseButtonDown(0) && isOver && gameObject.name == "quitButton")
 		{

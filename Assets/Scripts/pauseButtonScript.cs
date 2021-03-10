@@ -96,6 +96,7 @@ public class pauseButtonScript : MonoBehaviour {
 		{
 			healthBarScript.paused = false;
 		}
+
 		//if you click this button while the game is paused (or gameover) and if this button is the quit button, go to the main menu
 		if (Input.GetMouseButtonDown(0) && isOver && (healthBarScript.paused || healthBarScript.gameover) && text.name == "quit")
 		{
@@ -110,6 +111,13 @@ public class pauseButtonScript : MonoBehaviour {
 			healthBarScript.gameover = false;
 			scoreScript.score = 0;
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		}
+
+		if (Input.GetMouseButtonDown(0) && isOver && healthBarScript.gameover && text2.name == "highscores")
+		{
+			healthBarScript.gameover = false;
+			scoreScript.score = 0;
+			SceneManager.LoadScene("Highscores");
 		}
 	}
 
