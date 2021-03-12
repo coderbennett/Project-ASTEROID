@@ -7474,6 +7474,7 @@ GameObject:
   - component: {fileID: 577783161}
   - component: {fileID: 577783163}
   - component: {fileID: 577783162}
+  - component: {fileID: 577783164}
   m_Layer: 5
   m_Name: tutorialText
   m_TagString: Untagged
@@ -7491,8 +7492,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1254133159}
+  m_Children: []
   m_Father: {fileID: 1327321650}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7514,7 +7514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.84313726}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -7533,9 +7533,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "welcome to project asteroid. \n\nWe have begun harvesting resources from
-    asteroids.\n\nHowever.. in doing so, we accidentally started an avalanche of
-    asteroids headed towards our home."
+  m_Text: "welcome to project asteroid. \n\nThe age of asteroid mining has arrived!\n\nHowever..
+    we accidentally started an avalanche of asteroids hurtling towards our planet.
+    . ."
 --- !u!222 &577783163
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7544,6 +7544,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577783160}
   m_CullTransparentMesh: 0
+--- !u!114 &577783164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577783160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60effe6064328154aae9e9018861bc1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 577783162}
+  time: 10
+  first: 1
 --- !u!1 &581543896
 GameObject:
   m_ObjectHideFlags: 0
@@ -18035,6 +18050,7 @@ GameObject:
   - component: {fileID: 1254133159}
   - component: {fileID: 1254133161}
   - component: {fileID: 1254133160}
+  - component: {fileID: 1254133162}
   m_Layer: 5
   m_Name: tutorialText2
   m_TagString: Untagged
@@ -18053,12 +18069,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 577783161}
-  m_RootOrder: 0
+  m_Father: {fileID: 1327321650}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00002670288, y: -4.300003}
+  m_AnchoredPosition: {x: 0.37810373, y: -6.699992}
   m_SizeDelta: {x: 721.7983, y: 206.98506}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1254133160
@@ -18074,7 +18090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -18093,15 +18109,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'your job is to manage asteroids.
+  m_Text: 'you must manage the asteroids.
 
 
-    prevent them from crashing into
-    earth.
+    prevent them from crashing into earth.
 
 
-    you can earn resources from orbiting asteroids and upon destroying
-    them.'
+    you
+    can earn resources from orbiting asteroids and upon destroying them.'
 --- !u!222 &1254133161
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18110,6 +18125,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254133158}
   m_CullTransparentMesh: 0
+--- !u!114 &1254133162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254133158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60effe6064328154aae9e9018861bc1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1254133160}
+  time: 10
+  first: 0
 --- !u!1 &1256548045
 GameObject:
   m_ObjectHideFlags: 0
@@ -19085,6 +19115,7 @@ GameObject:
   - component: {fileID: 1327321650}
   - component: {fileID: 1327321652}
   - component: {fileID: 1327321651}
+  - component: {fileID: 1327321653}
   m_Layer: 5
   m_Name: tutorialTextPanel
   m_TagString: Untagged
@@ -19104,12 +19135,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 577783161}
+  - {fileID: 1254133159}
   m_Father: {fileID: 439083336}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.7219849, y: -200.10004}
+  m_AnchoredPosition: {x: 1.7219238, y: -200.09998}
   m_SizeDelta: {x: -60.656128, y: -445.69855}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1327321651
@@ -19125,7 +19157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.24408852, g: 0.4245283, b: 0.11814703, a: 0.7019608}
+  m_Color: {r: 0.24408852, g: 0.4245283, b: 0.11814703, a: 0.6862745}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -19149,6 +19181,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327321649}
   m_CullTransparentMesh: 0
+--- !u!114 &1327321653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327321649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 575d5a2276b924947bcd1add68458ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 20
+  panel: {fileID: 1327321651}
 --- !u!1 &1330088761
 GameObject:
   m_ObjectHideFlags: 0
