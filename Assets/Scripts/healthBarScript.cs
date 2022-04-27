@@ -90,7 +90,10 @@ public class healthBarScript : MonoBehaviour {
 		//make sure to have only one game object play this sound
 		if (gameObject.name == "Health")
 		{
-			audio.Play();
+			if(volumeScript.volume != 2)
+            {
+				audio.Play();
+			}
 		}
 	}
 

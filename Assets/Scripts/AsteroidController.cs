@@ -6,12 +6,12 @@ public class AsteroidController : MonoBehaviour {
 
 	public GameObject asteroid;
 	public GameObject destroyAnimation;
-	public GameObject markAnimation;
+	//NOT IMPLEMENTED --public GameObject markAnimation;
 	private bool isOver = false;
 	public Animator animator;
 	public Rigidbody2D rb;
 	private Vector3 mousePosition;
-	public float moveSpeed = 20f;
+	public float moveSpeed = 1f;
 	public bool orbitting = false;
 
 	private Transform parent;
@@ -27,7 +27,7 @@ public class AsteroidController : MonoBehaviour {
 	private bool scoreNow = true;
 	private GameObject scoreBoard;
 
-	public float homingSpeed = 0.5f;
+	public float homingSpeed = 0.05f;
 	private float currentSpeed;
 	private bool isPaused = false;
 
@@ -42,7 +42,7 @@ public class AsteroidController : MonoBehaviour {
 	public AudioSource audio;
 	private bool audioOn = false;
 
-	private bool isMarked = false;
+	// NOT IMPLEMENTED --private bool isMarked = false;
 
 		private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -89,6 +89,14 @@ public class AsteroidController : MonoBehaviour {
 			Destroy(gameObject);
 		}
 
+		//NOT IMPLEMENTED if you left click on the asteroid with your mouse while it is not already marked for death and the game is not paused, initiate it's destruction
+		/*if (collision.tag == "Mark" && !isMarked && !healthBarScript.paused)
+		{
+			isMarked = true;
+			SpawnMarkedAnimation(transform.position);
+			Invoke("DestroyTarget", 2f);
+		}*/
+
 		//if the asteroid collides with a gravitational force
 		if (collision.tag == "Gravity")
 		{
@@ -96,22 +104,22 @@ public class AsteroidController : MonoBehaviour {
 			parent = collision.transform;
 
 			//if we collided with earth's gravitational pull while at a slow speed
-			if (parent.name == "Earth Gravitational Pull" && homingSpeed < 1f)
+			if (parent.name == "Earth Gravitational Pull" && homingSpeed < 0.075f)
 			{
 				//set the orbitting variable to true
 				orbitting = true;
 				//set the distance of the gravitational pull
-				gDistance = 1000;
+				gDistance = 10;
 			}
 
 			//same if statement as above just different standards for the moon than they were for the earth
 			else if (parent.name == "Moon Gravitational Pull")
 			{
 				orbitting = true;
-				gDistance = 500;
-				if (homingSpeed > 1f)
+				gDistance = 5;
+				if (homingSpeed > 0.075f)
                 {
-					homingSpeed = 0.5f;
+					homingSpeed = 0.05f;
                 }
 			}
 		} 
@@ -123,12 +131,13 @@ public class AsteroidController : MonoBehaviour {
 		Instantiate(destroyAnimation, position, Quaternion.identity);
 	}
 
-	//this method spawns a mark at the asteroid's location, and makes it a child to the asteroid
-	public void SpawnMarkedAnimation(Vector3 position)
+	//NOT IMPLEMENTED --this method spawns a mark at the asteroid's location, and makes it a child to the asteroid
+	/* public void SpawnMarkedAnimation(Vector3 position)
 	{
+		position += new Vector3(0, 0, -1);
 		GameObject mark = Instantiate(markAnimation, position, Quaternion.identity);
 		mark.transform.SetParent(transform);
-	}
+	} */
 
 	void Update()
 	{
@@ -274,20 +283,20 @@ public class AsteroidController : MonoBehaviour {
 	{
 		//move the asteroid towards earth at the specified speed
 		transform.position = Vector3.MoveTowards(transform.position, earth.transform.position, homingSpeed);
-		//if you left click on the asteroid with your mouse while it is not already marked for death and the game is not paused, initiate it's destruction
-		if (Input.GetMouseButtonDown(0) && isOver && !isMarked && !healthBarScript.paused)
+		//NOT IMPLEMENTED --if you left click on the asteroid with your mouse while it is not already marked for death and the game is not paused, initiate it's destruction
+		/*if (Input.GetMouseButtonDown(0) && isOver && !isMarked && !healthBarScript.paused)
 		{
 			isMarked = true;
 			SpawnMarkedAnimation(transform.position);
 			Invoke("DestroyTarget", 2f);
-		}
+		}*/
 
-		//if you right click on the asteroid with your mouse while the game is not paused, it will slow the course it has taken towards earth and follow your cursor
-		if (Input.GetMouseButton(1) && isOver && !healthBarScript.paused)
+		//if you left click on the asteroid with your mouse while the game is not paused, it will slow the course it has taken towards earth and follow your cursor
+		if (Input.GetMouseButton(0) && isOver && !healthBarScript.paused)
 		{
-			if (homingSpeed > 1f)
+			if (homingSpeed > 0.004f)
 			{
-				homingSpeed = 0.5f;
+				homingSpeed = 0.003f;
 			}
 			//set the position of the mouse to the mouse position
 			mousePosition = Input.mousePosition;
@@ -299,13 +308,16 @@ public class AsteroidController : MonoBehaviour {
 			//if the audio for the asteroid management is not currently on, turn it on and set the boolean to true
 			if (!audioOn)
             {
-				audio.Play();
-				audioOn = true;
+				if(volumeScript.volume != 2)
+				{
+					audio.Play();
+					audioOn = true;
+				}
 			}
 		}
 
 		//if the audio is on and the mouse isn't moving this asteroid anymore pause the audio and set the boolean to false
-		if (audioOn && !Input.GetMouseButton(1) && !isOver)
+		if (audioOn && !Input.GetMouseButton(0) && !isOver)
         {
 			audio.Pause();
 			audioOn = false;
@@ -321,7 +333,7 @@ public class AsteroidController : MonoBehaviour {
 	//set the speed of this asteroid to a speed in correlation to your current game's score
 	public void SetHoming()
 	{
-		homingSpeed = 5f + (scoreScript.score *.001f);
+		homingSpeed = 0.075f + (scoreScript.score *.0001f);
 	}
 
 	// Use this for initialization
@@ -363,8 +375,8 @@ public class AsteroidController : MonoBehaviour {
 		scoreNow = true;
 	}
 
-	//this method spawns a floating text and gives score points when you decide to manually destroy asteroids
-	void DestroyTarget()
+	//NOT IMPLEMENTED --this method spawns a floating text and gives score points when you decide to manually destroy asteroids
+	/*void DestroyTarget()
 	{
 		floatingTextController.CreateFloatingText("+6", transform, false, color);
 		scoreScript scoreboard = (scoreScript)scoreBoard.GetComponent(typeof(scoreScript));
@@ -372,5 +384,5 @@ public class AsteroidController : MonoBehaviour {
 		SpawnDestroyAnimation(transform.position);
 		spawnerScript.totalAsteroids--;
 		Destroy(gameObject);
-	}
+	}*/
 }

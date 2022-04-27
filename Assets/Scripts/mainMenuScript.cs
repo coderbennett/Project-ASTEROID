@@ -32,6 +32,7 @@ public class mainMenuScript : MonoBehaviour {
 		//if you left click the mouse over this game object and this game object's name is startButton, then start the game
 		if (Input.GetMouseButtonDown(0) && isOver && gameObject.name == "startButton")
 		{
+			scoreScript.score = 0;
 			SceneManager.LoadScene("Space");
 		}
 
